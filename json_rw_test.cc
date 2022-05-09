@@ -10,8 +10,6 @@ TEST(JsonAPITest, ReadReqDecode)
 {
     char *buf = (char *) "{\"command\":\"\", "
                          "\"uuid\":\"554f5fd8-f437-11eb-975c-7704b9e17821\", "
-                         "\"node_name\": \"name1\" ,"
-                         "\"group_name\": \"group1\"}";
     neu_json_read_req_t *req  = NULL;
     neu_json_mqtt_t *    mqtt = NULL;
 
@@ -28,7 +26,6 @@ TEST(JsonAPITest, ReadReqDecode)
 
 TEST(JsonAPITest, ReadResEncode)
 {
-    char *buf = (char *) "{\"tags\": [{\"name\": \"data1\", \"value\": 123}, "
                          "{\"name\": \"data2\", \"value\": 11.123456789}]}";
     char *               result = NULL;
     neu_json_read_resp_t res    = {
@@ -49,7 +46,6 @@ TEST(JsonAPITest, ReadResEncode)
               neu_json_encode_by_fn(&res, neu_json_encode_read_resp, &result));
     EXPECT_STREQ(buf, result);
 
-    free(res.tags[0].name);
     free(res.tags[1].name);
     free(res.tags);
     free(result);
